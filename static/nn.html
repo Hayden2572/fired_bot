@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Участники</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    /* Общие стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url("D:\tt.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: column; /* Добавлен для вертикального размещения */
+}
+
+/* Центральный блок */
+.center-box {
+    width: 400px;
+    padding: 30px;
+    background: #bcd2e8;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    position: relative;
+}
+
+/* Заголовок */
+h2 {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Список */
+.selectable-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background: #f2f2f2;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.list-item:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Выделенные элементы */
+.list-item.selected {
+    background: linear-gradient(135deg, #b5bde8, #7d7ad5);
+    color: #ffffff;
+}
+
+/* Иконки */
+.list-item i {
+    margin-right: 10px;
+    color: #707070;
+}
+
+.list-item.selected i {
+    color: #ffffff;
+}
+
+/* Кнопки */
+.next-button, .delete-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #b5bde8, #7d7ad5);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.next-button:hover, .delete-button:hover {
+    background: linear-gradient(135deg, #505050, #707070);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Стиль для сообщения об ошибке */
+.warning {
+    color: red;
+    margin-top: 10px;
+    display: none; /* Скрыто по умолчанию */
+}
+
+/* Стиль футера */
+.footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #707070;
+    margin-top: 30px; /* Отступ сверху от центрального блока */
+}
+
+.footer p {
+    margin: 0;
+}
+</style>
+<body>
+    <div class="center-box">
+        <h2>Выберите участников</h2>
+        <ul class="selectable-list">
+            <li class="list-item" onclick="toggleSelection(this)">
+                <i class="fas fa-user"></i> Участник 1
+            </li>
+            <li class="list-item" onclick="toggleSelection(this)">
+                <i class="fas fa-user"></i> Участник 2
+            </li>
+            <li class="list-item" onclick="toggleSelection(this)">
+                <i class="fas fa-user"></i> Участник 3
+            </li>
+            <li class="list-item" onclick="toggleSelection(this)">
+                <i class="fas fa-user"></i> Участник 4
+            </li>
+        </ul>
+        <button class="delete-button" onclick="deleteSelected()">Удалить</button>
+    </div>
+
+    <!-- Текст внизу страницы -->
+    <footer class="footer">
+        <p>Кипятильники - лучшая команда на хакатоне</p>
+    </footer>
+
+</body>
+
+<script>
+    // Функция для переключения выделения элемента
+function toggleSelection(element) {
+    element.classList.toggle('selected');
+    
+    // Получаем все выбранные элементы
+    const selectedItems = document.querySelectorAll('.list-item.selected');
+    
+    // Если хотя бы один канал выбран, разрешаем переход
+    const nextButton = document.getElementById('nextButton');
+    const warningMessage = document.getElementById('warning');
+    
+    if (selectedItems.length > 0) {
+        nextButton.removeAttribute('disabled');  // Разрешаем кнопку
+        warningMessage.style.display = 'none';   // Прячем сообщение о предупреждении
+    } else {
+        nextButton.setAttribute('disabled', 'true');  // Блокируем кнопку
+        warningMessage.style.display = 'block';       // Показываем сообщение
+    }
+}
+
+// Функция для удаления выбранных элементов
+function deleteSelected() {
+    const listItems = document.querySelectorAll('.list-item.selected');
+    listItems.forEach(item => item.remove());
+}
+// Переход на следующую страницу
+function goToNextPage() {
+    window.location.href = "nextpage.html";
+}
+</script>
+
+</html>

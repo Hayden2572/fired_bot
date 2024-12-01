@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Data Display</title>
+  <style>
+    .delete-button {
+      cursor: pointer;
+      background-color: #f44336; /* Красный цвет для кнопки удаления */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px; /* Отступ сверху */
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      border-radius: 30px;
+      background: url("D:\tt.jpg");
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #a5a5e0, #3834a3);
+      padding: 30px;
+      border-radius: 70px;
+    }
+
+    .window {
+      margin-bottom: 2px;
+      padding: 5px;
+      background-color: #514a70;
+      border-radius: 90px;
+      box-shadow: 0 20px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    [id^=c] {
+      display: none;
+    }
+
+    [id^=c] + label {
+      display: block;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgb(7, 36, 86);
+      text-align: center;   
+      position: relative;
+    }
+
+    [id^=c] + label:before {
+      content: '';   
+      position: absolute; top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgb(0, 0, 0);
+      clip-path: polygon(45% 64%, 84% 14%, 100% 28%, 47% 100%, 0 49%, 15% 32%);
+      transform: scale(0);
+      transition: transform .3s;
+    }
+
+    [id^=c]:checked + label:before {    
+      transform: scale(1);
+    }
+
+    .next-button, .delete-button, .select-all-button {
+      padding: 12px 20px;
+      font-size: 16px;
+      color: #000000;
+      background: linear-gradient(135deg, #506c90, #6b5398);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <h1 class="centered">Список чатов</h1>
+
+    <div class="window">
+      <h2 class="centered">
+          <input type="checkbox" name="c1" id="c1" />
+          <label for="c1" style="float: right; margin-right: 10px;"></label>
+          Канал 1
+      </h2>
+    </div>
+
+    <div class="window">
+      <h2 class="centered">
+          <input type="checkbox" name="c2" id="c2" />
+          <label for="c2" style="float: right; margin-right: 10px;"></label>
+          Канал 2
+      </h2>
+    </div>
+
+    <div class="window">
+      <h2 class="centered">
+          <input type="checkbox" name="c3" id="c3" />
+          <label for="c3" style="float: right; margin-right: 10px;"></label>
+          Канал 3
+      </h2>
+    </div>
+    <div>
+      <button class="select-all-button" id="selectAllButton">Выбрать всё</button>
+    <button class="delete-button" onclick="deleteSelected()">Удалить</button>
+  </div>
+
+  <script>
+    // Функция для удаления выбранных элементов
+    function deleteSelected() {
+      const windows = document.querySelectorAll('.window'); // Получаем все элементы с классом 'window'
+      windows.forEach(window => {
+        const checkbox = window.querySelector('input[type="checkbox"]');
+        if (checkbox && checkbox.checked) {
+          window.remove(); // Удаляем элемент, если чекбокс отмечен
+        }
+      });
+    }
+
+    // Обработчик для кнопки "Выбрать всё"
+    const selectAllButton = document.getElementById('selectAllButton');
+    const channelCheckboxes = document.querySelectorAll('input[type="checkbox"][name^="c"]');
+
+    selectAllButton.addEventListener('click', function() {
+      const allChecked = Array.from(channelCheckboxes).every(checkbox => checkbox.checked);
+      channelCheckboxes.forEach(checkbox => {
+        checkbox.checked = !allChecked; // Переключаем состояние всех чекбоксов
+      });
+    });
+  </script>
+</body>
+</html>

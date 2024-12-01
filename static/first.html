@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clear</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 200;
+      padding: 200px;
+      border-radius: 0px;
+      background: url("D:\tt.jpg");
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #a5a5e0, #3834a3);
+      padding: 30px;
+      border-radius: 70px;
+    }
+
+    .search-container {
+      margin-bottom: 10px;
+    }
+
+    .search-input {
+      color: #2f00cb;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #76a2db;
+      border-radius: 70px;
+      box-shadow: 0 20px 2px rgba(22, 10, 193, 0.1);
+    }
+
+    .button {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      background: linear-gradient(135deg, #000000, #3834a3);
+      color: #fff;
+      border: none;
+      border-radius: 70px;
+      cursor: pointer;
+    }
+    .circle {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(205, 202, 237);
+    border-radius: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3><img src=D:\загруженное.webp alt="" class="circle">
+    Какого участика вы хотите удалить?</h3>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="username">
+      <a href="two.html"><button class="button" onclick="clearSearchInput()">Найти</button></a>
+      <a href="nn2.html"><button class="button" onclick="clearSearchInput()">Поиск по каналу</button></a>
+    </div>
+  </div>
+
+  <script>
+    function clearSearchInput() {
+      document.getElementById('searchInput').value = '';
+    }
+  
+    document.addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) {
+        const searchButton = document.querySelector('.button');
+        searchButton.click();
+      }
+    });
+  </script>
+
+
+    
+</body>
+</html>
